@@ -1,0 +1,223 @@
+extends layout
+
+block nav
+  +toptip
+  +topnav
+  +topslider
+  
+block content
+  #front_tabs
+    .container
+      .tabs_wrapper.tabs1_wrapper
+        .tabs.tabs1
+          .tabs_tabs.tabs1_tabs
+            ul
+              li.active.flights
+                a(href='#tabs-1') 目的地查询
+              li.hotels
+                a(href='#tabs-2') 景点分类查询
+          .tabs_content.tabs1_content
+            #tabs-1
+              form.form1(action='javascript:;')
+                .row
+                  .col-sm-8.col-md-4
+                    .select1_wrapper
+                      label 请输入目的地：
+                      .select1_inner
+                        input.toplaceinput(type='text', name='toplace')
+                  .col-sm-4.col-md-2
+                    .button1_wrapper
+                      button.btn-default.btn-form1-submit(type='submit') Search
+            #tabs-2
+              form.form1(action='javascript:;')
+                .row
+                  .col-sm-8.col-md-4
+                    .select1_wrapper
+                      label 分类：
+                      .select1_inner
+                        select.select2.select(style='width: 100%;')
+                          option(value='1') 分类
+                          option(value='2') 分类
+                          option(value='3') 分类
+                          option(value='4') 分类
+                          option(value='5') 分类
+                          option(value='6') 分类
+                          option(value='7') 分类
+                          option(value='8') 分类
+                  .col-sm-4.col-md-2
+                    .button1_wrapper
+                      button.btn-default.btn-form1-submit(type='submit') Search
+  #why1
+    .container
+      h2.animated 众乐旅行
+      .title1.animated
+        | 抛开尘世的纷扰，远离城市的喧嚣，寻找一份宁静，奢侈地享受旅不问人，行随己意的潇洒。背上简单的行囊，踏上行程，走过一个又一个陌生的城市。去感受旖旎的自然风光，绚丽的民族风情，悠久的历史文化。
+      br
+      br
+      .row
+        .col-sm-3
+          .thumb2.animated(data-animation='flipInY', data-animation-delay='200')
+            .thumbnail.clearfix
+              a(href='#')
+                figure
+                  img.img1.img-responsive(src='/user/images/why1.png', alt='')
+                  img.img2.img-responsive(src='/user/images/why1_hover.png', alt='')
+                .caption
+                  .txt1 有趣的旅行
+        .col-sm-3
+          .thumb2.animated(data-animation='flipInY', data-animation-delay='300')
+            .thumbnail.clearfix
+              a(href='#')
+                figure
+                  img.img1.img-responsive(src='/user/images/why2.png', alt='')
+                  img.img2.img-responsive(src='/user/images/why2_hover.png', alt='')
+                .caption
+                  .txt1 温馨的众乐
+        .col-sm-3
+          .thumb2.animated(data-animation='flipInY', data-animation-delay='400')
+            .thumbnail.clearfix
+              a(href='#')
+                figure
+                  img.img1.img-responsive(src='/user/images/why3.png', alt='')
+                  img.img2.img-responsive(src='/user/images/why3_hover.png', alt='')
+                .caption
+                  .txt1 出色的行程
+        .col-sm-3
+          .thumb2.animated(data-animation='flipInY', data-animation-delay='500')
+            .thumbnail.clearfix
+              a(href='#')
+                figure
+                  img.img1.img-responsive(src='/user/images/why4.png', alt='')
+                  img.img2.img-responsive(src='/user/images/why4_hover.png', alt='')
+                .caption
+                  .txt1 动人的风情
+  #parallax1.parallax
+    .bg2.parallax-bg
+    .overlay
+    .parallax-content
+      .container
+        .row
+          .col-sm-10.animated
+            .txt1(style='color: #00a99d;') 最热门旅程
+            .txt2(style='color: #00a99d;') 介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍
+            .txt3(style='color: #00a99d;')
+              | 地点: 香港 
+              strong $159.00
+              span /人
+          .col-sm-2.animated
+            a.btn-default.btn0(href='#') 查看详情
+  #popular_cruises1
+    .container
+      h2.animated 最新旅程推荐
+      .title1.animated 这里有最新的旅程安排，在这里你或许可以发现你最想要去的地方。
+      br
+      br
+      #popular_wrapper.animated(data-animation='fadeIn', data-animation-delay='300')
+        #popular_inner
+          div
+            #popular
+              div
+                .carousel-box
+                  .inner
+                    .carousel.main
+                      ul
+                        li
+                          .popular
+                            .popular_inner
+                              figure
+                                img.img-responsive(src='/user/images/slider.jpg', alt='')
+                                .over
+                                  .v1
+                                    | 澳门 
+                                    span 17 Deal Offers
+                                  .v2 Lorem ipsum dolor sit amet, concateus.
+                              .caption
+                                .txt1
+                                  span 澳门
+                                  |  ￥120.00/人
+                                .txt2 Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.
+                                .txt3.clearfix
+                                  .right_side
+                                    a.btn-default.btn1(href='#') 查看详情
+                        li
+                          .popular
+                            .popular_inner
+                              figure
+                                img.img-responsive(src='/user/images/popular01.jpg', alt='')
+                                .over
+                                  .v1
+                                    | 澳门 
+                                    span 17 Deal Offers
+                                  .v2 Lorem ipsum dolor sit amet, concateus.
+                              .caption
+                                .txt1
+                                  span 澳门
+                                  |  ￥120.00/人
+                                .txt2 Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.
+                                .txt3.clearfix
+                                  .left_side
+                                    .stars1
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star2.png', alt='')
+                                    .nums - 18 Reviews
+                                  .right_side
+                                    a.btn-default.btn1(href='#') 查看详情
+                        li
+                          .popular
+                            .popular_inner
+                              figure
+                                img.img-responsive(src='/user/images/popular01.jpg', alt='')
+                                .over
+                                  .v1
+                                    | 澳门 
+                                    span 17 Deal Offers
+                                  .v2 Lorem ipsum dolor sit amet, concateus.
+                              .caption
+                                .txt1
+                                  span 澳门
+                                  |  ￥120.00/人
+                                .txt2 Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.
+                                .txt3.clearfix
+                                  .left_side
+                                    .stars1
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star2.png', alt='')
+                                    .nums - 18 Reviews
+                                  .right_side
+                                    a.btn-default.btn1(href='#') 查看详情
+                        li
+                          .popular
+                            .popular_inner
+                              figure
+                                img.img-responsive(src='/user/images/popular01.jpg', alt='')
+                                .over
+                                  .v1
+                                    | 澳门 
+                                    span 17 Deal Offers
+                                  .v2 Lorem ipsum dolor sit amet, concateus.
+                              .caption
+                                .txt1
+                                  span 澳门
+                                  |  ￥120.00/人
+                                .txt2 Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.
+                                .txt3.clearfix
+                                  .left_side
+                                    .stars1
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star1.png', alt='')
+                                      img(src='/user/images/star2.png', alt='')
+                                    .nums - 18 Reviews
+                                  .right_side
+                                    a.btn-default.btn1(href='#') 查看详情
+              .popular_pagination
+
+block footer
+  +mixfooter

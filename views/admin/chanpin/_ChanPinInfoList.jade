@@ -1,0 +1,14 @@
+each chanpinitem in chanpinList
+  tr
+    td #{chanpinitem.place}
+    td #{chanpinitem.fenleiname}
+    td #{chanpinitem.price}
+    td #{chanpinitem.hasimg==0?'未上传 ':'已上传'}
+      - if (chanpinitem.hasimg==0)
+        button.btn.btn-danger.btn-xs.btn-editchanpininfo
+          i.icon-pencil 立即上传
+    td(data-chanpinid= chanpinitem.id)
+      button.btn.btn-success.btn-xs.btn-readdchanpin
+        i.icon-ok 为该产品发布新行程
+      button.btn.btn-primary.btn-xs.btn-editchanpininfo
+        i.icon-pencil 修改信息
