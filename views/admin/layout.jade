@@ -41,9 +41,13 @@ html(lang='en')
         #sidebar.nav-collapse
           ul.sidebar-menu
             li.leftli-chanpin
-              a(href='javascript:;')
+              a(href='/admin/chanpin')
                 i.icon-dashboard
                 span 产品管理
+            li.leftli-fenlei
+              a(href='/admin/fenlei')
+                i.icon-dashboard
+                span 分类管理
             li.leftli-dingdan
               a(href='javascript:;')
                 i.icon-dashboard
@@ -79,4 +83,5 @@ html(lang='en')
   script(src='/public/layer/layer.js')
   script(src='/public/js/public.js')
   script(src='/travel/js/admin/pub.js')
+  script(src='/travel/js/admin/admin.js')
   block js

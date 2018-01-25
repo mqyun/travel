@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 2018-01-25 09:59:26
--- 服务器版本： 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Host: localhost
+-- Generation Time: 2018-01-25 13:46:56
+-- 服务器版本： 10.1.10-MariaDB
+-- PHP Version: 7.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -62,7 +62,7 @@ CREATE TABLE `chanpin` (
 --
 
 INSERT INTO `chanpin` (`id`, `place`, `introduce`, `fenlei`, `price`, `hasimg`, `adminid`) VALUES
-(2, '北京', '北京介绍', 2, '100.00', 0, 1);
+(2, '北京', '北京介绍', 3, '100.00', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,15 @@ CREATE TABLE `fenlei` (
 --
 
 INSERT INTO `fenlei` (`id`, `name`) VALUES
-(2, '分类2');
+(3, '海滨海岛'),
+(4, '特殊地貌'),
+(5, '城市风景'),
+(6, '生物景观'),
+(7, '壁画石窟'),
+(8, '民俗风情'),
+(9, '历史圣地'),
+(10, '纪念地'),
+(11, '其他');
 
 -- --------------------------------------------------------
 
@@ -212,7 +220,7 @@ ALTER TABLE `dingdan`
 -- 使用表AUTO_INCREMENT `fenlei`
 --
 ALTER TABLE `fenlei`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- 使用表AUTO_INCREMENT `user`
 --

@@ -15,7 +15,7 @@ $(document).on('click', '.btn-adminlogin', function() {
   } else {
     ajaxPost('/admin/login', data, function(result) {
       if (result.success) {
-        showTips('success', '\n', result.success + '两秒钟之后跳转到首页！');
+        showTips('success', '\n', result.success + '，两秒钟之后跳转到首页！');
         setTimeout(function() {
           location.href = '/admin/chanpin';
         }, 2000);

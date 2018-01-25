@@ -30,7 +30,7 @@ block content
                     .dataTables_paginate.paging_bootstrap.pagination
                       ul
                         - for (var i = 0; i < pagenum.page; i++)
-                          li.pageli(class= i==0?'active':'', data-pagenum= i+1)
+                          li.pageli.chanpin-pageli(class= i==0?'active':'', data-pagenum= i+1)
                             a(href='javascript:;')= i+1
             - else
               .panel-body
@@ -39,4 +39,8 @@ block content
                     img(src='/public/img/no-data.png')
 
 block js
-  script(src='/travel/js/admin/chanpin.js')
+  script.
+    $(function() {
+    	$('.leftli-chanpin').addClass('active');
+    	getPageInfo('/admin/pageChanPinInfo', {});
+    });

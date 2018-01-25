@@ -71,6 +71,36 @@ module.exports = {
       callback(err);
     });
   },
+  // 获取所有分类
+  getAllFenLei: function(callback) {
+    var sql = "select * from fenlei;";
+    db.exec(sql, '', function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 添加分类
+  addFenLei: function(name, callback) {
+    var sql = "insert into fenlei(name) values(?);";
+    db.exec(sql, name, function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  },
+  // 修改分类名称
+  xgFenLei: function(name, id, callback) {
+    var sql = "update fenlei set name = ? where id = ?;";
+    db.exec(sql, [name, id], function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  },
   // 获取所有订单页码
   getAllDingDanPage: function(callback) {
     var sql = "select ceil(count(id)/10) as page from dingdan;";

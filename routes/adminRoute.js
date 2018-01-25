@@ -55,7 +55,7 @@ router.get('/chanpin', function(req, res, next) {
       return next(err);
     }
     res.render('admin/chanpin/index', {
-      title: '管理员首页',
+      title: '产品管理',
       pagenum: pagenum[0]
     });
   });
@@ -75,6 +75,52 @@ router.post('/pageChanPinInfo', function(req, res, next) {
         'success': true,
         'view': html
       })
+    });
+  });
+});
+
+// 获取产品分类管理页面
+router.get('/fenlei', function(req, res, next) {
+  adminmodel.getAllFenLei(function(err, fenleiList) {
+    if (err) {
+      return next(err);
+    }
+    res.render('admin/fenlei/index', {
+      title: '分类管理',
+      fenleiList: fenleiList
+    });
+  });
+});
+
+// 添加分类
+router.post('/addFenLei', function(req, res, next) {
+  var name = req.body.name;
+  adminmodel.addFenLei(name, function(err) {
+    if (err) {
+      res.json({
+        'error': err
+      });
+      return next(err);
+    }
+    res.json({
+      'success': '添加分类成功'
+    });
+  });
+});
+
+// 修改分类
+router.post('/xgFenLei', function(req, res, next) {
+  var fenleiid = req.body.fenleiid;
+  var name = req.body.name;
+  adminmodel.xgFenLei(name, fenleiid, function(err) {
+    if (err) {
+      res.json({
+        'error': err
+      });
+      return next(err);
+    }
+    res.json({
+      'success': '修改分类名称成功'
     });
   });
 });
