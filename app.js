@@ -37,6 +37,8 @@ app.use(function(req, res, next) {
   res.locals.usertype = req.session.usertype || '';
   // 管理员权限
   res.locals.quanxian = req.session.quanxian || '';
+  // 管理员刚添加产品的id
+  res.locals.insertId = req.session.insertId || '';
   next();
 });
 

@@ -45,7 +45,7 @@ html(lang='en')
                 - if (name)
                   .dropdown
                     button#dropdownMenu1.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
-                      | 欢迎您，马化腾
+                      | 欢迎您，#{name}
                       span.caret
                     ul.dropdown-menu(aria-labelledby='dropdownMenu1')
                       li
@@ -80,10 +80,6 @@ html(lang='en')
                   ul.nav.navbar-nav.sf-menu.clearfix
                     li
                       a(href='index.html') 众乐首页
-                    li
-                      a(href='about.html') 查看最新旅程
-                    li
-                      a(href='gallery.html') 查看热门旅程
       mixin topslider
         #slider_wrapper
           .container

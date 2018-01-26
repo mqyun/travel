@@ -3,6 +3,8 @@ $(function() {
 });
 
 $(document).on('click', '.pageli', function() {
+	$('.pageli').removeClass('active');
+	$(this).addClass('active');
 	var page = $(this).data('pagenum');
 	var data = {
 		'page': page

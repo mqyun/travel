@@ -32,19 +32,9 @@ module.exports = {
     });
   },
   // 添加产品基本信息
-  addChanPinInfo: function(place, introduce, fenlei, price, renshu, starttime, youwantime, adminid, callback) {
-    var sql = "insert into chanpin(place, introduce, fenlei, price, renshu, starttime, youwantime, adminid) values(?,?,?,?,?,?,?,?);";
-    db.exec(sql, [place, introduce, fenlei, price, renshu, starttime, youwantime, adminid], function(err, rows) {
-      if (err) {
-        callback(err);
-      }
-      callback(err, rows);
-    });
-  },
-  // 上传产品图片获取刚添加的产品的id
-  getJustAddChanPin: function(adminid, callback) {
-    var sql = "select * from chanpin where adminid = ? order by id desc limit 0, 1;";
-    db.exec(sql, [place, introduce, fenlei, price, renshu, starttime, youwantime, adminid], function(err, rows) {
+  addChanPinInfo: function(place, introduce, fenlei, price, adminid, callback) {
+    var sql = "insert into chanpin(place, introduce, fenlei, price, adminid) values(?,?,?,?,?);";
+    db.exec(sql, [place, introduce, fenlei, price, adminid], function(err, rows) {
       if (err) {
         callback(err);
       }
@@ -69,6 +59,56 @@ module.exports = {
         callback(err);
       }
       callback(err);
+    });
+  },
+  // 获取某个产品的信息
+  getThisChanPinInfo: function(id, callback) {
+    var sql = "select * from chanpin where id = ?;";
+    db.exec(sql, id, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 修改产品信息
+  updateChanPinInfo: function(place, introduce, fenlei, price, adminid, chanpinid, callback) {
+    var sql = "update chanpin set place = ?, introduce = ?, fenlei = ?, price = ?, adminid = ? where id = ?;";
+    db.exec(sql, [place, introduce, fenlei, price, adminid, chanpinid], function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  },
+  // 获取某个产品的所有图片
+  getThisChanPinImg: function(chanpinid, callback) {
+    var sql = "select * from chanpinimg where chanpinid = ?;";
+    db.exec(sql, chanpinid, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 为产品添加行程
+  addXingCheng: function(chanpinid, renshu, starttime, callback) {
+    var sql = "insert into xingcheng(chanpinid, renshu, starttime) values(?,?,?);";
+    db.exec(sql, [chanpinid, renshu, starttime], function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  },
+  // 获取某个产品的行程
+  getThisXingCheng: function(chanpinid, callback) {
+    var sql = "select * from xingcheng where chanpinid = ?;";
+    db.exec(sql, chanpinid, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
     });
   },
   // 获取所有分类
