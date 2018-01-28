@@ -4,43 +4,9 @@ block nav
   +toptip
   +topnav
   +topslider
+  +searchtab
   
 block content
-  #front_tabs
-    .container
-      .tabs_wrapper.tabs1_wrapper
-        .tabs.tabs1
-          .tabs_tabs.tabs1_tabs
-            ul
-              li.active.flights
-                a(href='#tabs-1') 目的地查询
-              li.hotels
-                a(href='#tabs-2') 景点分类查询
-          .tabs_content.tabs1_content
-            #tabs-1
-              form.form1(action='javascript:;')
-                .row
-                  .col-sm-8.col-md-4
-                    .select1_wrapper
-                      label 请输入目的地：
-                      .select1_inner
-                        input.toplaceinput(type='text', name='toplace')
-                  .col-sm-4.col-md-2
-                    .button1_wrapper
-                      button.btn-default.btn-form1-submit(type='submit') Search
-            #tabs-2
-              form.form1(action='javascript:;')
-                .row
-                  .col-sm-8.col-md-4
-                    .select1_wrapper
-                      label 分类：
-                      .select1_inner
-                        select.select2.select(style='width: 100%;')
-                          each fenleiitem in fenleiList
-                            option(value= fenleiitem.id)= fenleiitem.name
-                  .col-sm-4.col-md-2
-                    .button1_wrapper
-                      button.btn-default.btn-form1-submit(type='submit') Search
   #why1
     .container
       h2.animated 众乐旅行

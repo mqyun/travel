@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 2018-01-26 09:43:28
--- 服务器版本： 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Host: localhost
+-- Generation Time: 2018-01-28 15:18:16
+-- 服务器版本： 10.1.10-MariaDB
+-- PHP Version: 7.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -115,10 +115,17 @@ CREATE TABLE `dingdan` (
   `xingchengid` int(10) NOT NULL,
   `userid` int(10) NOT NULL,
   `ddrenshu` int(10) NOT NULL,
-  `allprice` varchar(50) NOT NULL,
+  `allprice` varchar(50) CHARACTER SET utf8 NOT NULL,
   `time` datetime NOT NULL,
   `state` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- 转存表中的数据 `dingdan`
+--
+
+INSERT INTO `dingdan` (`id`, `chanpinid`, `xingchengid`, `userid`, `ddrenshu`, `allprice`, `time`, `state`) VALUES
+(1, 1, 2, 1, 2, '280.00', '2018-01-28 17:15:42', 0);
 
 -- --------------------------------------------------------
 
@@ -160,6 +167,13 @@ CREATE TABLE `user` (
   `phone` varchar(20) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- 转存表中的数据 `user`
+--
+
+INSERT INTO `user` (`id`, `account`, `password`, `name`, `phone`) VALUES
+(1, 'mht', '202cb962ac59075b964b07152d234b70', '马化腾', '110');
+
 -- --------------------------------------------------------
 
 --
@@ -180,7 +194,7 @@ CREATE TABLE `xingcheng` (
 
 INSERT INTO `xingcheng` (`id`, `chanpinid`, `renshu`, `ydrenshu`, `starttime`) VALUES
 (1, 3, 50, 0, 1518228000),
-(2, 1, 100, 0, 1517461200),
+(2, 1, 100, 2, 1517461200),
 (3, 4, 100, 0, 1518760800),
 (4, 4, 80, 0, 1517986800);
 
@@ -253,7 +267,7 @@ ALTER TABLE `chanpinimg`
 -- 使用表AUTO_INCREMENT `dingdan`
 --
 ALTER TABLE `dingdan`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- 使用表AUTO_INCREMENT `fenlei`
 --
@@ -263,7 +277,7 @@ ALTER TABLE `fenlei`
 -- 使用表AUTO_INCREMENT `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- 使用表AUTO_INCREMENT `xingcheng`
 --

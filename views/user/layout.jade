@@ -50,8 +50,11 @@ html(lang='en')
                     ul.dropdown-menu(aria-labelledby='dropdownMenu1')
                       li
                         a.ge(href='#') 设置
+                      - if (usertype == 'user')
                       li
-                        a.ru(href='#') 退出
+                        a.ru(href='/myorder') 我的订单
+                      li
+                        a.ru(href='/logout') 退出
                 - else
                   .dropdown
                     button#dropdownMenu1.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
@@ -59,16 +62,16 @@ html(lang='en')
                       span.caret
                     ul.dropdown-menu(aria-labelledby='dropdownMenu1')
                       li
-                        a.ge(href='#') 登录
+                        a.ge(href='/login') 登录
                       li
-                        a.ru(href='#') 注册
+                        a.ru(href='/reg') 注册
       mixin topnav
         .top2_wrapper
           .container
             .top2.clearfix
               header
                 .logo_wrapper
-                  a.logo(href='index.html')
+                  a.logo(href='/')
                     img.img-responsive(src='/user/images/logo.png', alt='')
               .navbar.navbar_.navbar-default
                 button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.navbar-collapse')
@@ -79,7 +82,7 @@ html(lang='en')
                 .navbar-collapse.navbar-collapse_.collapse
                   ul.nav.navbar-nav.sf-menu.clearfix
                     li
-                      a(href='index.html') 众乐首页
+                      a(href='/') 众乐首页
       mixin topslider
         #slider_wrapper
           .container
@@ -119,6 +122,42 @@ html(lang='en')
                                   .txt3
                                     span 若想走别逗留愈是被挽留愈沉重不如一起走。
                   .slider_pagination
+      mixin searchtab(margintop)
+        #front_tabs(style='margin-top: #{margintop}')
+          .container
+            .tabs_wrapper.tabs1_wrapper
+              .tabs.tabs1
+                .tabs_tabs.tabs1_tabs
+                  ul
+                    li.active.flights
+                      a(href='#tabs-1') 目的地查询
+                    li.hotels
+                      a(href='#tabs-2') 景点分类查询
+                .tabs_content.tabs1_content
+                  #tabs-1
+                    form.form1(action='/placelist', method='post')
+                      .row
+                        .col-sm-8.col-md-4
+                          .select1_wrapper
+                            label 请输入目的地：
+                            .select1_inner
+                              input.toplaceinput(type='text', name='place')
+                        .col-sm-4.col-md-2
+                          .button1_wrapper
+                            input.btn-default.btn-form1-submit(type='submit', value='查询')
+                  #tabs-2
+                    form.form1(action='/fllist', method='post')
+                      .row
+                        .col-sm-8.col-md-4
+                          .select1_wrapper
+                            label 分类：
+                            .select1_inner
+                              select.select2.select(style='width: 100%;', name='fenlei')
+                                each fenleiitem in fenleiList
+                                  option(value= fenleiitem.id)= fenleiitem.name
+                        .col-sm-4.col-md-2
+                          .button1_wrapper
+                            button.btn-default.btn-form1-submit(type='submit') 查询
       // 导航
       block nav
       //内容
@@ -134,4 +173,5 @@ html(lang='en')
     block footer
     script(src='/user/js/bootstrap.min.js')
     script(src='/public/js/public.js')
+    script(src='/travel/js/user/pub.js')
     block js

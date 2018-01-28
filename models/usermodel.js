@@ -73,8 +73,8 @@ module.exports = {
   },
   // 获取某个产品的行程
   getThisChanPinXingCheng: function(nowdatetime, chanpinid, callback) {
-    var sql = "select * from xingcheng where chanpinid = ? and starttime > nowdatetime;";
-    db.exec(sql, chanpinid, function(err, rows) {
+    var sql = "select * from xingcheng where chanpinid = ? and starttime > ?;";
+    db.exec(sql, [chanpinid, nowdatetime], function(err, rows) {
       if (err) {
         callback(err);
       }
@@ -93,8 +93,18 @@ module.exports = {
   },
   // 下单
   addDingDan: function(chanpinid, xingchengid, userid, ddrenshu, allprice, callback) {
-    var sql = "insert into dingdan(chanpinid, xingchengid, userid, ddrenshu, allprice, time, state) values(?,?,?,?,?,now(),0;";
+    var sql = "insert into dingdan(chanpinid, xingchengid, userid, ddrenshu, allprice, time, state) values(?,?,?,?,?,now(),0);";
     db.exec(sql, [chanpinid, xingchengid, userid, ddrenshu, allprice], function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  },
+  // 下单后增加改行程剩余一定人数
+  updateYdRenShu: function(ddrenshu, xingchengid, callback) {
+    var sql = "update xingcheng set ydrenshu = ydrenshu + ? where id = ?;";
+    db.exec(sql, [ddrenshu, xingchengid], function(err) {
       if (err) {
         callback(err);
       }

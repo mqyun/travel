@@ -1,0 +1,67 @@
+extends ../layout
+
+block nav
+	+toptip
+	+searchtab('20px')
+
+block content
+	.breadcrumbs1_wrapper
+		.container
+			.breadcrumbs1
+				a(href="/") 首页
+				span /
+				| #{smalltip}
+	#content
+		.container
+			.tabs_wrapper.tabs1_wrapper
+				.tabs.tabs2.ui-tabs.ui-widget.ui-widget-content.ui-corner-all
+					.tabs_content.tabs1_content
+						#tabs-2
+							.row
+								.col-sm-3
+									ul.ul3.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header.ui-corner-all(role="tablist")
+										li 公告           
+									.sm_slider.sm_slider2
+										a.sm_slider_prev(href="#")
+										a.sm_slider_next(href="#")
+										div
+											.carousel-box
+												.inner
+													.carousel.main
+														ul
+															li
+																.sm_slider_inner
+																	.txt1
+																		| Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.
+																	|                                   
+																	.txt2 George Smith
+															|                               
+															li
+																.sm_slider_inner
+																	.txt1
+																		| Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.
+																	|                                   
+																	.txt2 Adam Parker
+
+								.col-sm-9
+									- if (chanpinList.length > 0)
+										each chanpinitem in chanpinList
+											.col-sm-4
+												.thumb5
+													.thumbnail.clearfix
+														figure
+															img.img-responsive(src= chanpinitem.url, alt="")
+															|                             
+															.over
+																.v1 #{chanpinitem.place}
+														.caption
+															.txt1 #{chanpinitem.place}
+															.txt3.clearfix
+																.left_side
+																	.price ￥#{chanpinitem.price}/人
+																.right_side
+																	a.btn-default.btn1(href="/detail/" + chanpinitem.id) 查看详情
+									- else
+										.no-datacon
+											.no-data
+												img(src='/public/img/no-data.png')
