@@ -406,4 +406,167 @@ router.post('/addXingCheng', function(req, res, next) {
   });
 });
 
+// 获取订单页面
+router.get('/dingDan/:state', function(req, res, next) {
+  var state = req.params.state;
+  adminmodel.getAllDingDanPage(state, function(err, pagenum) {
+    if (err) {
+      return next(err);
+    }
+    res.render('admin/dingdan/index', {
+      title: '订单管理',
+      pagenum: pagenum[0],
+      state: state
+    });
+  });
+});
+
+// 获取某一页未处理订单列表
+router.post('/pageDingDanInfo', function(req, res, next) {
+  var page = (req.body.page - 1) * 10 || 0;
+  var state = req.body.state;
+  adminmodel.selectAllDingDan(state, page, function(err, dingdanList) {
+    if (err) {
+      return next(err);
+    }
+    for (var i = 0; i < dingdanList.length; i++) {
+      var sqltime = dingdanList[i].starttime * 1000;
+      var parsetime = new Date(sqltime);
+      dingdanList[i].starttime = parsetime.getFullYear() + '-' + (parsetime.getMonth() + 1) + '-' + parsetime.getDate() + ' ' + parsetime.getHours() + ':' + parsetime.getMinutes() + ':' + parsetime.getSeconds();
+      var sqltime = dingdanList[i].time;
+      var parsetime = new Date(sqltime);
+      dingdanList[i].time = parsetime.getFullYear() + '-' + (parsetime.getMonth() + 1) + '-' + parsetime.getDate() + ' ' + parsetime.getHours() + ':' + parsetime.getMinutes() + ':' + parsetime.getSeconds();
+    }
+    res.render('admin/dingdan/_DingDanList', {
+      dingdanList: dingdanList,
+      state: state
+    }, function(err, html) {
+      res.json({
+        'success': true,
+        'view': html
+      })
+    });
+  });
+});
+
+// 获取某一页未处理订单列表
+router.post('/pageYclDingDanInfo', function(req, res, next) {
+  var page = (req.body.page - 1) * 10 || 0;
+  var state = req.body.state;
+  adminmodel.selectAllDingDan(state, page, function(err, dingdanList) {
+    if (err) {
+      return next(err);
+    }
+    res.render('admin/dingdan/_DingDanList', {
+      dingdanList: dingdanList,
+      state: state
+    }, function(err, html) {
+      res.json({
+        'success': true,
+        'view': html
+      })
+    });
+  });
+});
+
+// 获取某个订单的用户信息
+router.post('/getThisDingDanUserInfo', function(req, res, next) {
+  var userid = req.body.userid;
+  adminmodel.getThisDingDanUserInfo(userid, function(err, userInfo) {
+    if (err) {
+      res.json({
+        'error': err
+      });
+      return next(err);
+    }
+    res.render('admin/dingdan/_UserInfo', {
+      userInfo: userInfo[0]
+    }, function(err, html) {
+      res.json({
+        'success': true,
+        'view': html
+      });
+    });
+  });
+});
+
+// 处理订单
+router.post('/handleDingDan', function(req, res, next) {
+  var dingdanid = req.body.dingdanid;
+  adminmodel.handleDingDan(dingdanid, function(err) {
+    if (err) {
+      res.json({
+        'error': err
+      });
+      return next(err);
+    }
+    res.json({
+      'success': '订单处理成功'
+    });
+  });
+});
+
+// 用户管理
+router.get('/userinfo', function(req, res) {
+  adminmodel.selectAllUser(function(err, userList) {
+    if (err) {
+      return next(err);
+    }
+    res.render('admin/userinfo/index', {
+      title: '用户管理',
+      userList: userList
+    });
+  });
+});
+
+// 管理员列表界面
+router.get('/adminList', function(req, res, next) {
+  adminmodel.selectAllAdmin(function(err, rows) {
+    res.render('admin/admin/index', {
+      adminList: rows
+    });
+  });
+});
+
+// 添加管理员modal
+router.post('/addAdminModal', function(req, res, next) {
+  res.render('admin/admin/_AddAdmin', {}, function(err, html) {
+    res.json({
+      'success': true,
+      'view': html
+    });
+  });
+});
+
+// 添加管理员
+router.post('/addAdmin', function(req, res, next) {
+  var hash = crypto.createHash('md5');
+  var account = req.body.account;
+  var reqpassword = req.body.password;
+  hash.update(reqpassword);
+  var password = hash.digest('hex');
+  var name = req.body.name;
+  var quanxian = req.body.quanxian;
+  adminmodel.addAdmin(account, password, name, quanxian, function(err) {
+    if (err) {
+      res.json({
+        'error': err
+      });
+      return next(err);
+    }
+    res.json({
+      'success': '添加管理员成功'
+    });
+  });
+});
+
+router.get('/logout', function(req, res) {
+  req.session.name = '';
+  req.session.uid = '';
+  req.session.usertype = '';
+  req.session.quanxian = '';
+  req.session.insertId = '';
+  res.redirect('/');
+});
+
 module.exports = router;

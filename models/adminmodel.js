@@ -141,20 +141,30 @@ module.exports = {
       callback(err);
     });
   },
-  // 获取所有订单页码
-  getAllDingDanPage: function(callback) {
-    var sql = "select ceil(count(id)/10) as page from dingdan;";
-    db.exec(sql, '', function(err, rows) {
+  // 获取已处理或未处理订单页码
+  getAllDingDanPage: function(state, callback) {
+    var sql = "select ceil(count(id)/10) as page from dingdan where state = ?;";
+    db.exec(sql, state, function(err, rows) {
       if (err) {
         callback(err);
       }
       callback(err, rows);
     });
   },
-  // 显示所有订单
-  selectAllDingDan: function(page, callback) {
-    var sql = "select dingdan.*, chanpin.place from dingdan left join chanpin on dingdan.chanpinid = chanpin.id order by id desc limit " + page + ", 10;";
-    db.exec(sql, account, function(err, rows) {
+  // 获取已处理或未处理订单
+  selectAllDingDan: function(state, page, callback) {
+    var sql = "select dingdan.*, chanpin.place, xingcheng.starttime from (dingdan left join chanpin on dingdan.chanpinid = chanpin.id) left join xingcheng on xingcheng.id = dingdan.xingchengid where state = ? order by id desc limit " + page + ", 10;";
+    db.exec(sql, state, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 获取订单用户信息
+  getThisDingDanUserInfo: function(userid, callback) {
+    var sql = "select * from user where id =?;";
+    db.exec(sql, userid, function(err, rows) {
       if (err) {
         callback(err);
       }
@@ -171,20 +181,10 @@ module.exports = {
       callback(err);
     });
   },
-  // 获取所有用户页码
-  getAllUserPage: function(callback) {
-    var sql = "select ceil(count(id)/10) as page from user;";
-    db.exec(sql, '', function(err, rows) {
-      if (err) {
-        callback(err);
-      }
-      callback(err, rows);
-    });
-  },
   // 显示所有用户
-  selectAllUser: function(page, callback) {
-    var sql = "select * from user order by id desc limit " + page + ", 10;";
-    db.exec(sql, account, function(err, rows) {
+  selectAllUser: function(callback) {
+    var sql = "select * from user order by id desc;";
+    db.exec(sql, function(err, rows) {
       if (err) {
         callback(err);
       }

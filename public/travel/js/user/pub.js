@@ -70,8 +70,61 @@ $(document).on('click', '.btn-addDingDan', function() {
       ajaxPost('/addDingDan', data, function(result) {
         if (result.success) {
           showTips('success', 'Success!', result.success);
+          location.reload();
         }
       });
     });
   }
+});
+
+// 已处理订单
+$(document).on('click', '.btn-ycldingdan', function() {
+  $('.btn-order').removeClass('btn-info');
+  $(this).addClass('btn-info');
+  $('.yclList').show();
+  $('.wclList').hide();
+});
+
+// 未处理订单
+$(document).on('click', '.btn-wcldingdan', function() {
+  $('.btn-order').removeClass('btn-info');
+  $(this).addClass('btn-info');
+  $('.yclList').hide();
+  $('.wclList').show();
+});
+
+// 修改密码
+$(document).on('click', '.userUpdatePassword', function() {
+  layer.open({
+    type: 1,
+    title: '修改密码',
+    area: ['800px'],
+    skin: 'layui-layer-lan',
+    content: '<div class="panel-body">\
+    <div class="form col-md-12"><form class="form-horizontal tasi-form">\
+    <div class="form-group"><label class="control-label col-lg-2">原密码</label>\
+    <div class="col-lg-10"><input type="password" name="oldpassword" class="form-control"></div></div>\
+    <div class="form-group"><label class="control-label col-lg-2">新密码</label>\
+    <div class="col-lg-10"><input type="password" name="password" class="form-control"></div></div></div></div>',
+    btn: ['修改'],
+    shadeClose: true,
+    yes: function(index, layero) {
+      var oldpassword = $('input[name="oldpassword"]').val();
+      var password = $('input[name="password"]').val();
+      var data = {
+        'oldpassword': oldpassword,
+        'password': password
+      }
+      if (oldpassword.length == 0 || password.length == 0) {
+        showTips('warning', 'Warning!', '请检查填写信息！');
+      } else {
+        ajaxPost('/updatePassword', data, function(result) {
+          if (result.success) {
+            showTips('success', 'Success!', result.success);
+          }
+        });
+      }
+      layer.close(index);
+    }
+  });
 });

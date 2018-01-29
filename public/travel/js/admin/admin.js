@@ -261,3 +261,82 @@ $(document).on('click', '.btn-addxingchengmodal', function() {
     }
   });
 });
+
+// 获取用户信息getThisDingDanUserInfo
+$(document).on('click', '.btn-getThisDingDanUserInfo', function() {
+  var userid = $(this).data('userid');
+  var data = {
+    'userid': userid
+  }
+  ajaxPost('/admin/getThisDingDanUserInfo', data, function(result) {
+    if (result.success) {
+      layer.open({
+        type: 1,
+        title: '用户信息',
+        area: ['500px'],
+        skin: 'layui-layer-lan',
+        content: result.view,
+        shadeClose: true
+      });
+    }
+  });
+});
+
+$(document).on('click', '.btn-clDingDan', function() {
+  var dingdanid = $(this).data('dingdanid');
+  var data = {
+    'dingdanid': dingdanid
+  }
+  showBtnTips('success', '\n', '确定处理订单吗？', '取消', '确定', function() {
+    ajaxPost('/admin/handleDingDan', data, function(result) {
+      if (result.success) {
+        showTips('success', '\n', result.success);
+        setTimeout(function() {
+          location.reload();
+        }, 1000);
+      }
+    });
+  });
+});
+
+// 添加管理员modal
+$(document).on('click', '.btn-addadmin', function() {
+  ajaxPost('/admin/addAdminModal', {}, function(result) {
+    if (result.success) {
+      layer.open({
+        type: 1,
+        title: '添加管理员',
+        area: ['800px'],
+        skin: 'layui-layer-lan',
+        content: result.view,
+        btn: ['添加'],
+        shadeClose: true,
+        yes: function(index, layero) {
+          var account = $('input[name="admin-account"]').val();
+          var password = $('input[name="admin-password"]').val();
+          var name = $('input[name="admin-name"]').val();
+          var quanxian = $('select[name="admin-quanxian"]').val();
+          var data = {
+            'account': account,
+            'password': password,
+            'name': name,
+            'quanxian': quanxian
+          }
+          if (account.length == 0 || password.length == 0 || name.length == 0) {
+            showTips('warning', 'Warning!', '请检查填写信息！');
+          } else {
+            ajaxPost('/admin/addAdmin', data, function(result) {
+              if (result.success) {
+                showTips('success', 'Success!', result.success);
+                setTimeout(function() {
+                  location.reload();
+                }, 1000);
+              }
+            });
+          }
+          layer.close(index);
+        }
+      });
+    }
+  });
+});

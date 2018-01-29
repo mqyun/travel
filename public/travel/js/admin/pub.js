@@ -13,6 +13,14 @@ $(document).on('click', '.pageli', function() {
 	if ($(this).hasClass('chanpin-pageli')) {
 		url = '/admin/pageChanPinInfo';
 	}
+	if ($(this).hasClass('wcldingdan-pageli')) {
+		url = '/admin/pageDingDanInfo';
+		data.state = '0';
+	}
+	if ($(this).hasClass('ycldingdan-pageli')) {
+		url = '/admin/pageDingDanInfo';
+		data.state = '1';
+	}
 	getPageInfo(url, data);
 });
 

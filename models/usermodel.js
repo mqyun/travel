@@ -112,14 +112,33 @@ module.exports = {
     });
   },
   // 查看自己的订单
-  selectMyDingDan: function(userid, callback) {
-    var sql = "select dingdan.*, chanpin.place, xingcheng.starttime from (dingdan left join chanpin on dingdan.chanpinid = chanpin.id) left join xingcheng on dingdan.xingchengid = xingcheng.id where userid = ?;";
-    db.exec(sql, userid, function(err, rows) {
+  selectMyDingDan: function(userid, state, callback) {
+    var sql = "select dingdan.*, chanpin.place, xingcheng.starttime, chanpinimg.url from ((dingdan left join chanpin on dingdan.chanpinid = chanpin.id) left join xingcheng on xingcheng.chanpinid = chanpin.id) left join chanpinimg on chanpinimg.chanpinid = dingdan.chanpinid where dingdan.userid = ? and dingdan.state = ? group by chanpin.id;";
+    db.exec(sql, [userid, state], function(err, rows) {
       if (err) {
         callback(err);
       }
       callback(err, rows);
     });
   },
-
+  // 获取原密码
+  getOldPassword: function(id, callback) {
+    var sql = "select * from user where id = ?;";
+    db.exec(sql, id, function(err, rows) {
+			if (err) {
+				callback(err);
+			}
+			callback(err, rows);
+		});
+  },
+  // 修改密码
+  updatePassword: function(password, id, callback) {
+    var sql = "update user set password = ? where id = ?;";
+    db.exec(sql, [password, id], function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  },
 }

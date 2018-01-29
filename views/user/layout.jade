@@ -49,7 +49,7 @@ html(lang='en')
                       span.caret
                     ul.dropdown-menu(aria-labelledby='dropdownMenu1')
                       li
-                        a.ge(href='#') 设置
+                        a.ge.userUpdatePassword(href='javascript:;') 修改密码
                       - if (usertype == 'user')
                       li
                         a.ru(href='/myorder') 我的订单
@@ -172,6 +172,7 @@ html(lang='en')
     // 页脚
     block footer
     script(src='/user/js/bootstrap.min.js')
+    script(src='/public/layer/layer.js')
     script(src='/public/js/public.js')
     script(src='/travel/js/user/pub.js')
     block js

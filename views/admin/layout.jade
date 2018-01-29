@@ -34,7 +34,7 @@ html(lang='en')
                 b.caret
               ul.dropdown-menu.extended.logout
                 li
-                  a(href='')
+                  a(href='/admin/logout')
                     i.icon-key
                     |  退出
     mixin leftnav
@@ -49,17 +49,21 @@ html(lang='en')
               a(href='/admin/fenlei')
                 i.icon-dashboard
                 span 分类管理
-            li.leftli-dingdan
-              a(href='javascript:;')
+            li.leftli-wcldingdan
+              a(href='/admin/dingDan/0')
                 i.icon-dashboard
-                span 订单管理
+                span 未处理订单
+            li.leftli-ycldingdan
+              a(href='/admin/dingDan/1')
+                i.icon-dashboard
+                span 已处理订单
             li.leftli-user
-              a(href='javascript:;')
+              a(href='/admin/userinfo')
                 i.icon-dashboard
                 span 用户管理
             - if (quanxian == 1)
               li.leftli-admin
-                a(href='javascript:;')
+                a(href='/admin/adminList')
                   i.icon-dashboard
                   span 管理员管理
     // 导航
